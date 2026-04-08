@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './index.css';
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+//const API_BASE = import.meta.env.VITE_API_URL || 'https://bellcorpbackend.onrender.com/api';
 
 function App() {
   const [availability, setAvailability] = useState(null);
   const [parkedVehicles, setParkedVehicles] = useState([]);
-  
+
   const [parkForm, setParkForm] = useState({ vehicle_number: '', vehicle_type: 'Bike' });
   const [parkResult, setParkResult] = useState(null);
   const [parkError, setParkError] = useState(null);
@@ -104,19 +105,19 @@ function App() {
         <form onSubmit={handlePark}>
           <div className="form-group">
             <label>Vehicle Number</label>
-            <input 
-              type="text" 
-              required 
+            <input
+              type="text"
+              required
               placeholder="e.g. MH-12-AB-1234"
               value={parkForm.vehicle_number}
-              onChange={(e) => setParkForm({...parkForm, vehicle_number: e.target.value})}
+              onChange={(e) => setParkForm({ ...parkForm, vehicle_number: e.target.value })}
             />
           </div>
           <div className="form-group">
             <label>Vehicle Type</label>
-            <select 
+            <select
               value={parkForm.vehicle_type}
-              onChange={(e) => setParkForm({...parkForm, vehicle_type: e.target.value})}
+              onChange={(e) => setParkForm({ ...parkForm, vehicle_type: e.target.value })}
             >
               <option value="Bike">Bike</option>
               <option value="Car">Car</option>
@@ -128,8 +129,8 @@ function App() {
 
         {parkResult && (
           <div className="ticket-result">
-            <strong>Success!</strong><br/>
-            Ticket ID: {parkResult.ticket.id}<br/>
+            <strong>Success!</strong><br />
+            Ticket ID: {parkResult.ticket.id}<br />
             Entry: {new Date(parkResult.ticket.entry_time + 'Z').toLocaleString()}
           </div>
         )}
@@ -149,12 +150,12 @@ function App() {
         <form onSubmit={handleExit}>
           <div className="form-group">
             <label>Ticket ID or Vehicle Number</label>
-            <input 
-              type="text" 
-              required 
+            <input
+              type="text"
+              required
               placeholder="e.g. 1 or MH-12-AB-1234"
               value={exitForm.identifier}
-              onChange={(e) => setExitForm({...exitForm, identifier: e.target.value})}
+              onChange={(e) => setExitForm({ ...exitForm, identifier: e.target.value })}
             />
           </div>
           <button type="submit" className="btn danger">Calculate Fee & Exit</button>
@@ -162,9 +163,9 @@ function App() {
 
         {exitResult && (
           <div className="ticket-result" style={{ background: 'rgba(59, 130, 246, 0.1)', borderColor: 'rgba(59, 130, 246, 0.2)', color: '#93c5fd' }}>
-            <strong>Exit Processed!</strong><br/>
-            Vehicle: {exitResult.vehicle_number}<br/>
-            Duration: {exitResult.duration_hours} hrs<br/>
+            <strong>Exit Processed!</strong><br />
+            Vehicle: {exitResult.vehicle_number}<br />
+            Duration: {exitResult.duration_hours} hrs<br />
             <strong>Fee to Pay: ₹{exitResult.fee}</strong>
           </div>
         )}
