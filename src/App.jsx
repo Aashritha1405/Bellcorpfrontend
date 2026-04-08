@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './index.css';
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/';
 //const API_BASE = import.meta.env.VITE_API_URL || 'https://bellcorpbackend.onrender.com/api';
 
 function App() {
